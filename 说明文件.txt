@@ -1,0 +1,42 @@
+﻿模块说明：
+	IIC_lib:		IIC接口函数
+	    |->初始化：I2C_Setup
+	    |			#参数：<无>
+	    |			*调用：
+	    |				GPIO端口复用时钟初始化
+	    |				IIC硬件控制器初始化
+	    |				NVIC中断优先级初始化
+	    |->释放：<无>
+	    |->常量：<无>
+	    |->变量：<无>
+	    |->资源：占用IICx事件响应中断，占用GPIO端口，占用IIC控制器
+	    |->方法：
+	    |	|->uint8_t I2C_WriteData (uint8_t dev_address, uint8_t address, uint8_t *buffer, uint16_t data_len)
+	    |	|		在送出器件地址dev_address和寄存器地址address后将buffer中的data_len个数据送入IIC总线
+	    |	|		#参数：
+	    |	|			dev_address	器件地址，读/写位自动清除
+	    |	|			address		寄存器地址，使用burst模式，只给出第一个寄存器地址即可
+	    |	|			buffer		送出数据缓存，在发送期间必须保持不变
+	    |	|			data_len		送出数据长度，byte单位
+	    |	|		*调用：<无>
+	    |	|		&返回：0x00
+	    |	|		
+	    |	|->uint8_t I2C_ReadData (uint8_t dev_address, uint8_t address, uint8_t *buffer, uint16_t data_len)
+	    |	|		在送出器件地址dev_address和寄存器地址address后从IIC总线中读data_len个数据送入buffer
+	    |	|		#参数：
+	    |	|			dev_address	器件地址，读/写位自动置位
+	    |	|			address		寄存器地址，使用burst模式，只给出第一个寄存器地址即可
+	    |	|			buffer		接收数据缓存，在接收期间必须保持不变
+	    |	|			data_len		接收数据长度，byte单位
+	    |	|		*调用：<无>
+	    |	|		&返回：0x00
+	    |	|
+	    |	|->uint8_t I2C_isBusy (void)
+	    |	|		判断IIC总线是否正被使用
+	    |	|		#参数：<无>
+	    |	|		*调用：<无>
+	    |	|		&返回：
+	    |	|			0x00			未被占用
+	    |	|			0x01			被占用
+	    
+	IIC_MPU6050: 	IIC接口的6050函数，通过MPU6050_Setup（）初始化
